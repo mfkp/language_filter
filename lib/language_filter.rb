@@ -16,11 +16,16 @@ module LanguageFilter
     DEFAULT_MATCHLIST = File.dirname(__FILE__) + "/../config/matchlists/profanity.txt"
     DEFAULT_REPLACEMENT = :stars
     DEFAULT_CREATIVE_LETTERS = false
+    DEFAULT_MATCH_FULL_WORDS = true
 
     def initialize(options={})
       @creative_letters = if options[:creative_letters] then
         options[:creative_letters]
       else DEFAULT_CREATIVE_LETTERS end
+      
+      @match_full_words = if options[:match_full_words] then
+        options[:match_full_words]
+      else DEFAULT_MATCH_FULL_WORDS end
 
       @matchlist = if options[:matchlist] then
         validate_list_content(options[:matchlist])
@@ -269,7 +274,7 @@ module LanguageFilter
       if @creative_letters then
         CREATIVE_BEG_REGEX
       else
-        '\\b'
+        @match_full_words ? '\\b' : ''
       end
     end
 
@@ -277,7 +282,7 @@ module LanguageFilter
       if @creative_letters then
         CREATIVE_END_REGEX
       else
-        '\\b'
+        @match_full_words ? '\\b' : ''
       end
     end
   end
