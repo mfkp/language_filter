@@ -23,7 +23,7 @@ module LanguageFilter
         options[:creative_letters]
       else DEFAULT_CREATIVE_LETTERS end
       
-      @match_full_words = if options[:match_full_words] then
+      @match_full_words = if [true, false].include? options[:match_full_words] then
         options[:match_full_words]
       else DEFAULT_MATCH_FULL_WORDS end
 
