@@ -214,6 +214,18 @@ Well, if you have :creative_letters activated, the matchlist that your filtering
 
 And that barely legible mess can be made completely illegible by the `sanitize` method. Even *this* crazy string of regex can be beaten though. People *will* have to get quite creative, but people *are* creative. And making it difficult to enter banned content can make it quite an attractive challenge. For this reason and because of the aforementioned performance hit, **this option is not recommended for production systems**.
 
+### `:match_full_words`
+
+The `match_full_words` initializer option (default: true) sets the option of either matching words with word boundaries (whitespace, tabs, etc). The default option is true, meaning that it will only match full words and not substrings. If it's set to false, it will match and filter substrings inside the text.
+
+Example, with `match_full_words: true`, searching for the word 'poop':
+
+`'poophead'` would not match, but `'poop head'` would match
+
+Example, with `match_full_words: false`, searching for the word 'poop':
+
+`'poophead'` would match, `'poop head'` would also match
+
 ### Methods to modify filters after creation
 
 If you ever want to change the matchlist, exceptionlist, or replacement type, each parameter is accessible via an assignment method.
